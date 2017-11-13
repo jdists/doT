@@ -7,10 +7,6 @@ interface IDoTAttrs extends jdistsUtil.IAttrs {
    * 数据来源
    */
   data?: string
-  /**
-   * 是否重新编译，默认为需要
-   */
-  rework?: string
 }
 
 /**
@@ -22,7 +18,6 @@ interface IDoTAttrs extends jdistsUtil.IAttrs {
  * @param attrs.rework 是否重新编译
  * @param scope 作用域
  * @param scope.execImport 导入数据
- * @param scope.compile 编译 jdists 文本
  * @return 返回渲染后的结果
  * @example processor():base
   ```js
@@ -36,18 +31,14 @@ interface IDoTAttrs extends jdistsUtil.IAttrs {
         age: 13
       `
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('<b>{{=it.name}} - {{=it.age}}</b>', attrs, scope))
-  // > compile:<b>tom - 13</b>
+  // > <b>tom - 13</b>
   ```
- * @example processor():execImport is object & rework is No
+ * @example processor():execImport is object
   ```js
   let attrs = {
     data: '#name',
-    rework: 'No'
   }
   let scope = {
     execImport: function (importion) {
@@ -56,40 +47,21 @@ interface IDoTAttrs extends jdistsUtil.IAttrs {
         age: 13,
       }
     },
-    compile: function (content) {
-      return 'compile:' + content
-    },
   }
   console.log(processor('<b>{{=it.name}} - {{=it.age}}</b>', attrs, scope))
   // > <b>tom - 13</b>
   ```
  * @example processor():data is undefined
   ```js
-  let attrs = {
-  }
-  let scope = {
-    execImport: function (importion) {
-      return importion
-    },
-    compile: function (content) {
-      return 'compile:' + content
-    },
-  }
+  let attrs = {}
+  let scope = {}
   console.log(processor('<b>{{=1 + 2}}</b>', attrs, scope))
-  // > compile:<b>3</b>
+  // > <b>3</b>
   ```
  * @example processor():content is null
   ```js
-  let attrs = {
-  }
-  let scope = {
-    execImport: function (importion) {
-      return importion
-    },
-    compile: function (content) {
-      return content
-    },
-  }
+  let attrs = {}
+  let scope = {}
   console.log(processor(null, attrs, scope))
   // > null
   ```
@@ -108,9 +80,5 @@ export = (function (content: string, attrs: IDoTAttrs, scope: jdistsUtil.IScope)
     }
   }
 
-  if (jdistsUtil.isNo(attrs.rework)) {
-    return render(data)
-  } else {
-    return scope.compile(render(data))
-  }
+  return render(data)
 }) as jdistsUtil.IProcessor

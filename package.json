@@ -1,6 +1,6 @@
 {
   "name": "@jdists/dot",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "doT as jdists processor",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
