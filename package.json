@@ -1,6 +1,6 @@
 {
   "name": "@jdists/dot",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "doT as jdists processor",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
@@ -33,7 +33,7 @@
   "homepage": "https://github.com/jdists/doT#readme",
   "dependencies": {
     "dot": "^1.1.2",
-    "js-yaml": "^3.10.0"
+    "jdists-util": "^0.1.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.33",
@@ -46,8 +46,7 @@
     "merge2": "^1.1.0",
     "mocha": "^2.0.1",
     "should": "^4.1.0",
-    "typescript": "^2.0.3",
-    "jdists-util": "^0.0.7"
+    "typescript": "^2.0.3"
   },
   "files": [
     "lib"
